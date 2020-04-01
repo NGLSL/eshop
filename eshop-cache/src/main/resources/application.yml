@@ -26,7 +26,28 @@ spring:
         time-between-eviction-runs: 10s
   cache:
     jcache:
-      config: classpath:ehcache.xml
+      config: classpath:config/ehcache.xml
+  kafka:
+    bootstrap-servers:
+      - 192.168.11.161:9092
+      - 192.168.11.176:9092
+      - 192.168.11.164:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: 1
+      batch-size: 100
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: eshop-cache-group
+    properties:
+      spring:
+        json:
+          trusted:
+            packages: '*'
 mybatis:
   mapper-locations: mapper/**/*.xml
   configuration:
@@ -35,5 +56,4 @@ mybatis:
 server:
   port: 8081
 logging:
-  level:
-    org.springframework.cache: debug
+  config: classpath:config/log4j2.xml

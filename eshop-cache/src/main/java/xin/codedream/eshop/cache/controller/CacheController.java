@@ -24,7 +24,7 @@ public class CacheController {
      */
     @PostMapping("testPutCache")
     public String testPutCache(@RequestBody ProductInfo productInfo) {
-        cacheService.saveLocalCache(productInfo);
+        cacheService.saveProductInfoToLocalCache(productInfo);
         return "success";
     }
 

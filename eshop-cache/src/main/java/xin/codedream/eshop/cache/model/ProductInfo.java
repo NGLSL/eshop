@@ -1,9 +1,6 @@
 package xin.codedream.eshop.cache.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -17,8 +14,15 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ProductInfo implements Serializable {
     private Long id;
     private String name;
     private Double price;
+    private String pictureList;
+    private String specification;
+    private String serviceId;
+    private String color;
+    private String size;
+    private Long shopId;
 }

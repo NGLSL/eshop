@@ -7,7 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>eshop</name>
     <description>eshop</description>
-
+    <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

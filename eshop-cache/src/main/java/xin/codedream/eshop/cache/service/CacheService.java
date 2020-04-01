@@ -1,6 +1,7 @@
 package xin.codedream.eshop.cache.service;
 
 import xin.codedream.eshop.cache.model.ProductInfo;
+import xin.codedream.eshop.cache.model.ShopInfo;
 
 /**
  * 缓存接口
@@ -15,7 +16,15 @@ public interface CacheService {
      * @param productInfo 商品信息
      * @return 商品信息
      */
-    ProductInfo saveLocalCache(ProductInfo productInfo);
+    ProductInfo saveProductInfoToLocalCache(ProductInfo productInfo);
+
+    /**
+     * 将店铺信息保存到缓存中
+     *
+     * @param shopInfo 店铺信息
+     * @return 店铺信息
+     */
+    ShopInfo saveShopInfoToLocalCache(ShopInfo shopInfo);
 
     /**
      * 从本地缓存中获取商品信息
@@ -24,4 +33,35 @@ public interface CacheService {
      * @return 商品信息
      */
     ProductInfo getLocalCache(Long id);
+
+    /**
+     * 将商品信息保存到Redis中
+     *
+     * @param productInfo 商品信息
+     */
+    void saveProductInfoToRedisCache(ProductInfo productInfo);
+
+    /**
+     * 从本地缓存中获取商品信息
+     *
+     * @param productId 商品id
+     * @return 商品信息
+     */
+    ProductInfo getProductInfoFromLocalCache(Long productId);
+
+    /**
+     * 将店铺信息保存到Redis中
+     *
+     * @param shopInfo 店铺信息
+     */
+    void saveShopInfoToRedisCache(ShopInfo shopInfo);
+
+    /**
+     * 从本地缓存中获取店铺信息
+     *
+     * @param shopId 店铺id
+     * @return 店铺信息
+     */
+    ShopInfo getShopInfoFromLocalCache(Long shopId);
+
 }

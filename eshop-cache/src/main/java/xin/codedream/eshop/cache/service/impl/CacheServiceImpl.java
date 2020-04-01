@@ -2,8 +2,11 @@ package xin.codedream.eshop.cache.service.impl;
 
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import xin.codedream.eshop.cache.model.ProductInfo;
+import xin.codedream.eshop.cache.model.ShopInfo;
+import xin.codedream.eshop.cache.model.enums.RedisKeyEnum;
 import xin.codedream.eshop.cache.service.CacheService;
 
 /**
@@ -15,16 +18,49 @@ import xin.codedream.eshop.cache.service.CacheService;
 @Service
 public class CacheServiceImpl implements CacheService {
     private static final String CACHE_NAME = "local";
+    private final RedisTemplate<String, Object> redisTemplate;
 
-    @CachePut(cacheNames = CACHE_NAME, key = "'key_'+#productInfo.getId()")
+    public CacheServiceImpl(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
+    @CachePut(cacheNames = CACHE_NAME, key = "'product:info:' + #productInfo.getId()")
     @Override
-    public ProductInfo saveLocalCache(ProductInfo productInfo) {
+    public ProductInfo saveProductInfoToLocalCache(ProductInfo productInfo) {
         return productInfo;
     }
 
+    @CachePut(cacheNames = CACHE_NAME, key = "'shop:info:'+#shopInfo.getId()")
     @Override
-    @Cacheable(cacheNames = CACHE_NAME, key = "'key_'+#id")
+    public ShopInfo saveShopInfoToLocalCache(ShopInfo shopInfo) {
+        return shopInfo;
+    }
+
+    @Override
+    @Cacheable(cacheNames = CACHE_NAME, key = "'product:info:'+#id")
     public ProductInfo getLocalCache(Long id) {
+        return null;
+    }
+
+    @Override
+    public void saveProductInfoToRedisCache(ProductInfo productInfo) {
+        redisTemplate.opsForValue().set(RedisKeyEnum.PRODUCT_INFO.getKeyPrefix() + productInfo.getId(), productInfo);
+    }
+
+    @Cacheable(cacheNames = CACHE_NAME, key = "'product:info:'+#productId")
+    @Override
+    public ProductInfo getProductInfoFromLocalCache(Long productId) {
+        return null;
+    }
+
+    @Override
+    public void saveShopInfoToRedisCache(ShopInfo shopInfo) {
+        redisTemplate.opsForValue().set(RedisKeyEnum.SHOP_INFO.getKeyPrefix() + shopInfo.getId(), shopInfo);
+    }
+
+    @Cacheable(cacheNames = CACHE_NAME, key = "'shop:info:'+#shopId")
+    @Override
+    public ShopInfo getShopInfoFromLocalCache(Long shopId) {
         return null;
     }
 }

@@ -32,3 +32,5 @@ mybatis:
     lazy-loading-enabled: true
 server:
   port: 8082
+logging:
+  config: classpath:config/log4j2.xml

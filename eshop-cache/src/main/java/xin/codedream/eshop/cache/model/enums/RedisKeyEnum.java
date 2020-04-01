@@ -13,7 +13,9 @@ public enum RedisKeyEnum {
     /**
      * 产品库存 KEY 前缀
      */
-    PRODUCT_INVENTORY("product:inventory:");
+    PRODUCT_INFO("product:info:"),
+    SHOP_INFO("shop:info:"),
+    ;
 
     private String keyPrefix;
 
