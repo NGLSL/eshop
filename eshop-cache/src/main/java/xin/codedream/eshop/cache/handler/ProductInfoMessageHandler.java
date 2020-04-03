@@ -23,7 +23,8 @@ public class ProductInfoMessageHandler implements KafkaMessageHandler {
         log.info("[ProductInfoMessageHandler]接收到数据");
         if (message instanceof ProductInfo) {
             ProductInfo productInfo = (ProductInfo) message;
-            cacheService.saveProductCache(productInfo, true);
+            // 主动刷入缓存
+            cacheService.saveProductCache(productInfo);
         }
     }
 }

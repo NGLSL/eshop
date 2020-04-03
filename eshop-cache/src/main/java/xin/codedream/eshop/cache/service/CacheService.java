@@ -37,10 +37,9 @@ public interface CacheService {
      * 将商品信息保存到Redis中和本地缓存中
      *
      * @param productInfo       商品信息
-     * @param isWriteLocalCache 是否写入本地缓存
      * @throws Exception 异常
      */
-    void saveProductCache(ProductInfo productInfo, boolean isWriteLocalCache) throws Exception;
+    void saveProductCache(ProductInfo productInfo) throws Exception;
 
     /**
      * 从Redis缓存或者本地缓存中获取商品信息

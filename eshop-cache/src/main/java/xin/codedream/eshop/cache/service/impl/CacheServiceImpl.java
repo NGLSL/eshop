@@ -52,11 +52,10 @@ public class CacheServiceImpl implements CacheService {
     }
 
     @Override
-    public void saveProductCache(ProductInfo productInfo, boolean isWriteLocalCache) throws Exception {
-        if (isWriteLocalCache) {
-            // 保存到本地缓存
-            this.saveProductInfoToLocalCache(productInfo);
-        }
+    public void saveProductCache(ProductInfo productInfo) throws Exception {
+        // 保存到本地缓存
+        this.saveProductInfoToLocalCache(productInfo);
+
         // 将数据写入Redis之前，需要先获取一个分布式锁
         String path = ZookeeperLockEnum.PRODUCT_LOCK.getPath() + productInfo.getId();
         InterProcessMutex lock = new InterProcessMutex(zkClient, path);

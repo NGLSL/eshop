@@ -23,7 +23,8 @@ public class RebuildCacheThread implements Runnable {
         while (true) {
             try {
                 ProductInfo productInfo = RebuildCacheQueue.INSTANCE.takeProductInfo();
-                cacheService.saveProductCache(productInfo, false);
+                // 被动刷入缓存
+                cacheService.saveProductCache(productInfo);
             } catch (Exception e) {
                 log.error("刷入缓存失败:", e);
             }
