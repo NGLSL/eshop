@@ -19,12 +19,11 @@ public class ProductInfoMessageHandler implements KafkaMessageHandler {
     }
 
     @Override
-    public void process(Object message) {
+    public void process(Object message) throws Exception {
         log.info("[ProductInfoMessageHandler]接收到数据");
         if (message instanceof ProductInfo) {
             ProductInfo productInfo = (ProductInfo) message;
-            cacheService.saveProductInfoToLocalCache(productInfo);
-            cacheService.saveProductInfoToRedisCache(productInfo);
+            cacheService.saveProductCache(productInfo, true);
         }
     }
 }

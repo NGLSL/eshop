@@ -11,6 +11,7 @@ public interface KafkaMessageHandler {
      * 消息处理
      *
      * @param message 消息
+     * @throws Exception 异常
      */
-    void process(Object message);
+    void process(Object message) throws Exception;
 }

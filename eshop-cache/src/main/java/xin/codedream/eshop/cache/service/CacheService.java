@@ -27,19 +27,28 @@ public interface CacheService {
     ShopInfo saveShopInfoToLocalCache(ShopInfo shopInfo);
 
     /**
-     * 从本地缓存中获取商品信息
-     *
-     * @param id 商品ID
-     * @return 商品信息
-     */
-    ProductInfo getLocalCache(Long id);
-
-    /**
      * 将商品信息保存到Redis中
      *
      * @param productInfo 商品信息
      */
     void saveProductInfoToRedisCache(ProductInfo productInfo);
+
+    /**
+     * 将商品信息保存到Redis中和本地缓存中
+     *
+     * @param productInfo       商品信息
+     * @param isWriteLocalCache 是否写入本地缓存
+     * @throws Exception 异常
+     */
+    void saveProductCache(ProductInfo productInfo, boolean isWriteLocalCache) throws Exception;
+
+    /**
+     * 从Redis缓存或者本地缓存中获取商品信息
+     *
+     * @param productId 商品id
+     * @return 商品信息
+     */
+    ProductInfo getProductInfo(Long productId);
 
     /**
      * 从本地缓存中获取商品信息
@@ -48,6 +57,7 @@ public interface CacheService {
      * @return 商品信息
      */
     ProductInfo getProductInfoFromLocalCache(Long productId);
+
     /**
      * 从Redis缓存中获取商品信息
      *
@@ -70,6 +80,7 @@ public interface CacheService {
      * @return 店铺信息
      */
     ShopInfo getShopInfoFromLocalCache(Long shopId);
+
     /**
      * 从Redis缓存中获取店铺信息
      *

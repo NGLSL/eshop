@@ -23,12 +23,11 @@ public class KafkaConsumer {
         this.kafkaMessageHandlerChain = kafkaMessageHandlerChain;
     }
 
-    @KafkaListener(topics = {"test", "cache-msg"})
-    public void listen(ConsumerRecord<?, ?> record) {
+    @KafkaListener(topics = {"cache-msg"})
+    public void listen(ConsumerRecord<?, ?> record) throws Exception {
         Optional<?> kafkaMessage = Optional.ofNullable(record.value());
 
         if (kafkaMessage.isPresent()) {
-            // 看看怎么优化成适配器模式
             Object message = kafkaMessage.get();
             kafkaMessageHandlerChain.doProcess(message);
         }

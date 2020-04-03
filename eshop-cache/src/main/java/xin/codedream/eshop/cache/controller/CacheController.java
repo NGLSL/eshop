@@ -39,14 +39,7 @@ public class CacheController {
      */
     @RequestMapping("/getProductInfo/{id}")
     public ProductInfo getProductInfo(@PathVariable Long id) {
-        log.info("productId:{}", id);
-        ProductInfo productInfo = cacheService.getProductInfoFromLocalCache(id);
-        log.info("从本地缓存获取商品信息缓存");
-        if (productInfo == null) {
-            log.info("本地没有缓存，从Redis缓存获取商品信息缓存");
-            return cacheService.getProductInfoFromRedisCache(id);
-        }
-        return productInfo;
+        return cacheService.getProductInfo(id);
     }
 
     /**
@@ -57,11 +50,10 @@ public class CacheController {
      */
     @RequestMapping("/getShopInfo/{id}")
     public ShopInfo getShopInfo(@PathVariable Long id) {
-        log.info("shopId:{}", id);
         ShopInfo shopInfo = cacheService.getShopInfoFromLocalCache(id);
-        log.info("从本地缓存获取店铺信息缓存");
+        log.info("从本地缓存获取店铺信息缓存，店铺ID:{}", id);
         if (shopInfo == null) {
-            log.info("本地没有缓存，从Redis缓存获取店铺信息缓存");
+            log.info("本地没有缓存，从Redis缓存获取店铺信息缓存，店铺ID:{}", id);
             return cacheService.getShopInfoFromRedisCache(id);
         }
         return shopInfo;

@@ -6,6 +6,7 @@ import xin.codedream.eshop.inventory.thread.RequestProcessorThreadPool;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 系统初始化监听器
@@ -19,11 +20,7 @@ public class InitListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         // 初始化线程池和内存队列
-        RequestProcessorThreadPool.getInstance();
-    }
-
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-
+        ThreadPoolExecutor threadPoolExecutor = RequestProcessorThreadPool.INSTANCE.getThreadPoolExecutor();
+        log.info("请求线程池初始化，线程池核心数量：{}", threadPoolExecutor.getCorePoolSize());
     }
 }

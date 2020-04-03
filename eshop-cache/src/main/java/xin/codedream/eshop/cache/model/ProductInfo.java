@@ -3,6 +3,7 @@ package xin.codedream.eshop.cache.model;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 商品信息
@@ -26,4 +27,5 @@ public class ProductInfo implements Serializable {
     private String color;
     private String size;
     private Long shopId;
+    private Date modifyTime;
 }

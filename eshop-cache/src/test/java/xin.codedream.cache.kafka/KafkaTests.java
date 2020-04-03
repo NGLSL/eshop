@@ -12,6 +12,8 @@ import xin.codedream.eshop.cache.callback.ProductCallback;
 import xin.codedream.eshop.cache.model.ProductInfo;
 import xin.codedream.eshop.cache.model.ShopInfo;
 
+import java.util.Date;
+
 /**
  * Kafka测试
  *
@@ -26,7 +28,7 @@ public class KafkaTests {
     private ProductCallback productCallback;
 
     @Test
-    public void producer() throws JsonProcessingException {
+    public void producer() {
         ProductInfo productInfo = new ProductInfo();
         productInfo.setId(1L);
         productInfo.setName("Mac");
@@ -38,18 +40,18 @@ public class KafkaTests {
         productInfo.setSize("15.5");
         productInfo.setSpecification("16G/512G/I7");
         productInfo.setShopId(1L);
-        producer.send("test", productInfo, productCallback);
+        productInfo.setModifyTime(new Date());
+        producer.send("cache-msg", productInfo, productCallback);
     }
 
     @Test
-    public void shop() throws InterruptedException {
+    public void shop() {
         ShopInfo shopInfo = new ShopInfo();
         shopInfo.setId(1L);
         shopInfo.setServiceId("ShopInfoMessageHandler");
         shopInfo.setLevel("1");
         shopInfo.setName("百年老店");
         shopInfo.setGoodCommentRate("98%");
-        producer.send("test", shopInfo, null);
-        Thread.sleep(2000L);
+        producer.send("cache-msg", shopInfo, null);
     }
 }

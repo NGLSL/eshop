@@ -29,7 +29,7 @@ public class KafkaMessageHandlerChain {
         return this;
     }
 
-    public void doProcess(Object msg) {
+    public void doProcess(Object msg) throws Exception {
         HashMap<String, Object> hashMap = objectMapper.convertValue(msg, HashMap.class);
         Object serviceId = hashMap.get("serviceId");
         log.info("serviceId:{}", serviceId);
