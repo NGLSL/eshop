@@ -21,6 +21,7 @@ public class ProductInfo implements Serializable {
     private Double price;
     private String pictureList;
     private String specification;
+    private String service;
     private String serviceId;
     private String color;
     private String size;

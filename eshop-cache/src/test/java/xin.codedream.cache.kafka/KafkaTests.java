@@ -10,6 +10,7 @@ import xin.codedream.eshop.cache.handler.KafkaMessageHandlerChain;
 import xin.codedream.eshop.cache.kafka.KafkaProducer;
 import xin.codedream.eshop.cache.callback.ProductCallback;
 import xin.codedream.eshop.cache.model.ProductInfo;
+import xin.codedream.eshop.cache.model.ShopInfo;
 
 /**
  * Kafka测试
@@ -20,7 +21,7 @@ import xin.codedream.eshop.cache.model.ProductInfo;
 @SpringBootTest(classes = CacheApplication.class)
 public class KafkaTests {
     @Autowired
-    private KafkaProducer<ProductInfo> producer;
+    private KafkaProducer<Object> producer;
     @Autowired
     private ProductCallback productCallback;
 
@@ -31,11 +32,24 @@ public class KafkaTests {
         productInfo.setName("Mac");
         productInfo.setPrice(1000.00);
         productInfo.setServiceId("ProductInfoMessageHandler");
+        productInfo.setService("暂无售后");
         productInfo.setColor("white");
         productInfo.setPictureList("1.jpg");
-        productInfo.setSize("10");
+        productInfo.setSize("15.5");
         productInfo.setSpecification("16G/512G/I7");
         productInfo.setShopId(1L);
         producer.send("test", productInfo, productCallback);
+    }
+
+    @Test
+    public void shop() throws InterruptedException {
+        ShopInfo shopInfo = new ShopInfo();
+        shopInfo.setId(1L);
+        shopInfo.setServiceId("ShopInfoMessageHandler");
+        shopInfo.setLevel("1");
+        shopInfo.setName("百年老店");
+        shopInfo.setGoodCommentRate("98%");
+        producer.send("test", shopInfo, null);
+        Thread.sleep(2000L);
     }
 }

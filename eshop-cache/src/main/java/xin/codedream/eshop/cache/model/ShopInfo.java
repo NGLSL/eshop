@@ -18,4 +18,7 @@ import java.io.Serializable;
 public class ShopInfo implements Serializable {
     private Long id;
     private String serviceId;
+    private String name;
+    private String level;
+    private String goodCommentRate;
 }

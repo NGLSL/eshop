@@ -15,6 +15,8 @@
         <spring-dependencies.version>2.2.5.RELEASE</spring-dependencies.version>
         <mybatis-spring-boot-starter.version>2.1.2</mybatis-spring-boot-starter.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <curator-framework.version>4.0.1</curator-framework.version>
+        <curator-recipes.version>4.0.1</curator-recipes.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -29,6 +31,16 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator-framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator-recipes.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

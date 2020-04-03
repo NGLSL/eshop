@@ -54,6 +54,11 @@ public class CacheServiceImpl implements CacheService {
     }
 
     @Override
+    public ProductInfo getProductInfoFromRedisCache(Long productId) {
+        return (ProductInfo) redisTemplate.opsForValue().get(RedisKeyEnum.PRODUCT_INFO.getKeyPrefix() + productId);
+    }
+
+    @Override
     public void saveShopInfoToRedisCache(ShopInfo shopInfo) {
         redisTemplate.opsForValue().set(RedisKeyEnum.SHOP_INFO.getKeyPrefix() + shopInfo.getId(), shopInfo);
     }
@@ -62,5 +67,10 @@ public class CacheServiceImpl implements CacheService {
     @Override
     public ShopInfo getShopInfoFromLocalCache(Long shopId) {
         return null;
+    }
+
+    @Override
+    public ShopInfo getShopInfoFromRedisCache(Long shopId) {
+        return (ShopInfo) redisTemplate.opsForValue().get(RedisKeyEnum.SHOP_INFO.getKeyPrefix() + shopId);
     }
 }

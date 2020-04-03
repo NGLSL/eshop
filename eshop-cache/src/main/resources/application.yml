@@ -35,19 +35,18 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
       acks: 1
       batch-size: 100
     consumer:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       group-id: eshop-cache-group
     properties:
       spring:
         json:
           trusted:
             packages: '*'
+
 mybatis:
   mapper-locations: mapper/**/*.xml
   configuration:
@@ -57,3 +56,6 @@ server:
   port: 8081
 logging:
   config: classpath:config/log4j2.xml
+
+zookeeper:
+  connect-string: 192.168.11.161:2181,192.168.11.176:2181,192.168.11.164:2181
