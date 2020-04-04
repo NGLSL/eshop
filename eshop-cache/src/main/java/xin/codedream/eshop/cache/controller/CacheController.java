@@ -3,6 +3,7 @@ package xin.codedream.eshop.cache.controller;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import xin.codedream.eshop.cache.business.CacheBusinessService;
 import xin.codedream.eshop.cache.model.ProductInfo;
 import xin.codedream.eshop.cache.model.ShopInfo;
 import xin.codedream.eshop.cache.service.CacheService;
@@ -18,7 +19,7 @@ import xin.codedream.eshop.cache.service.CacheService;
 @Slf4j
 public class CacheController {
     private CacheService cacheService;
-
+    private CacheBusinessService cacheBusinessService;
     /**
      * 测试保存缓存
      *
@@ -39,7 +40,12 @@ public class CacheController {
      */
     @RequestMapping("/getProductInfo/{id}")
     public ProductInfo getProductInfo(@PathVariable Long id) {
-        return cacheService.getProductInfo(id);
+        try {
+            return cacheBusinessService.getProductInfo(id);
+        } catch (InterruptedException e) {
+            log.error("异常：", e);
+        }
+        return null;
     }
 
     /**

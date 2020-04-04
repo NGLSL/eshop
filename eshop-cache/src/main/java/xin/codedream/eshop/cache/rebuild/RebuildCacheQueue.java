@@ -25,6 +25,9 @@ public enum RebuildCacheQueue {
     }
 
     public void putProductInfo(ProductInfo productInfo) throws InterruptedException {
+        if (productInfo == null) {
+            return;
+        }
         queue.put(productInfo);
     }
 

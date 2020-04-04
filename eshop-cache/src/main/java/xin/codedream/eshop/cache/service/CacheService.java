@@ -33,21 +33,8 @@ public interface CacheService {
      */
     void saveProductInfoToRedisCache(ProductInfo productInfo);
 
-    /**
-     * 将商品信息保存到Redis中和本地缓存中
-     *
-     * @param productInfo       商品信息
-     * @throws Exception 异常
-     */
-    void saveProductCache(ProductInfo productInfo) throws Exception;
 
-    /**
-     * 从Redis缓存或者本地缓存中获取商品信息
-     *
-     * @param productId 商品id
-     * @return 商品信息
-     */
-    ProductInfo getProductInfo(Long productId);
+
 
     /**
      * 从本地缓存中获取商品信息

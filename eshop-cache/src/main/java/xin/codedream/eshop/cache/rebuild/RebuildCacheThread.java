@@ -1,8 +1,8 @@
 package xin.codedream.eshop.cache.rebuild;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.codedream.eshop.cache.business.CacheBusinessService;
 import xin.codedream.eshop.cache.model.ProductInfo;
-import xin.codedream.eshop.cache.service.CacheService;
 
 /**
  * 缓存重建线程
@@ -12,10 +12,10 @@ import xin.codedream.eshop.cache.service.CacheService;
  */
 @Slf4j
 public class RebuildCacheThread implements Runnable {
-    private CacheService cacheService;
+    private CacheBusinessService cacheBusinessService;
 
-    public RebuildCacheThread(CacheService cacheService) {
-        this.cacheService = cacheService;
+    public RebuildCacheThread(CacheBusinessService cacheBusinessService) {
+        this.cacheBusinessService = cacheBusinessService;
     }
 
     @Override
@@ -23,8 +23,9 @@ public class RebuildCacheThread implements Runnable {
         while (true) {
             try {
                 ProductInfo productInfo = RebuildCacheQueue.INSTANCE.takeProductInfo();
+                log.info("接收到队列的数据，即将进行处理，商品ID:{}", productInfo.getId());
                 // 被动刷入缓存
-                cacheService.saveProductCache(productInfo);
+                cacheBusinessService.saveProductCache(productInfo);
             } catch (Exception e) {
                 log.error("刷入缓存失败:", e);
             }

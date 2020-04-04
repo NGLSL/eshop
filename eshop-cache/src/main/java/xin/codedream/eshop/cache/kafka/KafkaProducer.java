@@ -31,7 +31,7 @@ public class KafkaProducer<T> {
      */
     public void send(String topic, T obj, ListenableFutureCallback<? super SendResult<Object, Object>> callback) {
         ListenableFuture<SendResult<Object, Object>> future = kafkaTemplate.send(topic, obj);
-        if (callback != null){
+        if (callback != null) {
             future.addCallback(callback);
         }
     }

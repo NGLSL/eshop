@@ -1,8 +1,8 @@
 package xin.codedream.eshop.cache.handler;
 
 import lombok.extern.slf4j.Slf4j;
+import xin.codedream.eshop.cache.business.CacheBusinessService;
 import xin.codedream.eshop.cache.model.ProductInfo;
-import xin.codedream.eshop.cache.service.CacheService;
 
 /**
  * 商品消息处理器
@@ -12,10 +12,10 @@ import xin.codedream.eshop.cache.service.CacheService;
  */
 @Slf4j
 public class ProductInfoMessageHandler implements KafkaMessageHandler {
-    private final CacheService cacheService;
+    private final CacheBusinessService cacheBusinessService;
 
-    public ProductInfoMessageHandler(CacheService cacheService) {
-        this.cacheService = cacheService;
+    public ProductInfoMessageHandler(CacheBusinessService cacheBusinessService) {
+        this.cacheBusinessService = cacheBusinessService;
     }
 
     @Override
@@ -24,7 +24,8 @@ public class ProductInfoMessageHandler implements KafkaMessageHandler {
         if (message instanceof ProductInfo) {
             ProductInfo productInfo = (ProductInfo) message;
             // 主动刷入缓存
-            cacheService.saveProductCache(productInfo);
+            log.info("Kafka主动刷新缓存，商品Id:{}", productInfo.getId());
+            cacheBusinessService.saveProductCache(productInfo);
         }
     }
 }

@@ -3,9 +3,7 @@ package xin.codedream.eshop.cache.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,11 +29,10 @@ public class KafkaMessageHandlerChain {
 
     public void doProcess(Object msg) throws Exception {
         HashMap<String, Object> hashMap = objectMapper.convertValue(msg, HashMap.class);
-        Object serviceId = hashMap.get("serviceId");
-        log.info("serviceId:{}", serviceId);
+        String serviceId = hashMap.get("serviceId").toString();
         if (serviceId != null && !"".equals(serviceId)) {
-            KafkaMessageHandler handler = map.get(serviceId.toString());
-            handler.process(msg);
+            KafkaMessageHandler handler = map.get(serviceId);
+            handler.process(hashMap);
         }
     }
 }
