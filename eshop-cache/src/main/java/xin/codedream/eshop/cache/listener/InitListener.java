@@ -6,7 +6,6 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.stereotype.Component;
 import xin.codedream.eshop.cache.business.CacheBusinessService;
 import xin.codedream.eshop.cache.rebuild.RebuildCacheThread;
-import xin.codedream.eshop.cache.service.CacheService;
 import xin.codedream.eshop.cache.thread.UserThreadFactory;
 
 import javax.servlet.ServletContext;

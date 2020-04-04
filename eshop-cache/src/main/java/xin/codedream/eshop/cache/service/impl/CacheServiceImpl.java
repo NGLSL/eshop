@@ -1,8 +1,6 @@
 package xin.codedream.eshop.cache.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.curator.framework.CuratorFramework;
-import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -10,11 +8,7 @@ import org.springframework.stereotype.Service;
 import xin.codedream.eshop.cache.model.ProductInfo;
 import xin.codedream.eshop.cache.model.ShopInfo;
 import xin.codedream.eshop.cache.model.enums.RedisKeyEnum;
-import xin.codedream.eshop.cache.model.enums.ZookeeperLockEnum;
-import xin.codedream.eshop.cache.rebuild.RebuildCacheQueue;
 import xin.codedream.eshop.cache.service.CacheService;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * 缓存Service 实现类
