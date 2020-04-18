@@ -17,6 +17,10 @@
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <curator-framework.version>4.0.1</curator-framework.version>
         <curator-recipes.version>4.0.1</curator-recipes.version>
+        <storm.version>2.1.0</storm.version>
+        <guava.version>29.0-jre</guava.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <metrics-core.version>3.0.2</metrics-core.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -42,11 +46,33 @@
                 <artifactId>curator-recipes</artifactId>
                 <version>${curator-recipes.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.storm</groupId>
+                <artifactId>storm-core</artifactId>
+                <version>${storm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.codahale.metrics</groupId>
+                <artifactId>metrics-core</artifactId>
+                <version>${metrics-core.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <modules>
         <module>eshop-cache</module>
         <module>eshop-inventory</module>
+        <module>storm-helloworld</module>
     </modules>
     <build>
         <pluginManagement>
